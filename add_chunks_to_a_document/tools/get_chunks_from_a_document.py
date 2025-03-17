@@ -86,16 +86,10 @@ class GetChunksTool(Tool):
                 yield self.create_variable_message("segment_ids", segment_ids)
                 yield self.create_variable_message("segment_contents", segment_contents)
                 
-                # 個別の変数としても各チャンクを出力（単一チャンクや先頭・末尾チャンク用）
-                if total_segments > 0:
-                    yield self.create_variable_message("first_segment", segments_data[0])
-                    yield self.create_variable_message("last_segment", segments_data[-1])
-                    
-                    # 各チャンクを個別の変数としても出力（最大10個まで）
-                    for i, segment in enumerate(segments_data[:10]):
-                        yield self.create_variable_message(f"segment_{i+1}", segment)
-                
-                # 完全なレスポンスをJSONとしても出力
+
+                for i, segment in enumerate(segments_data[:10]):
+                    yield self.create_variable_message(f"segment_{i+1}", segment)
+
                 yield self.create_json_message(result)
                 
             except ValueError:
