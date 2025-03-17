@@ -57,23 +57,19 @@ class GetChunksTool(Tool):
             # 成功レスポンス
             try:
                 result = response.json()
-                total_segments = 0
                 segments_data = []
+                total_segments = 0
                 
-                if "data" in result and "segments" in result["data"]:
-                    segments = result["data"]["segments"]
-                    total_segments = len(segments)
-                    
-                    # 整形したセグメントデータを作成
-                    for segment in segments:
-                        segment_info = {
-                            "id": segment.get("id", ""),
-                            "content": segment.get("content", ""),
-                            "answer": segment.get("answer", ""),
-                            "keywords": segment.get("keywords", []),
-                            "enabled": segment.get("enabled", True)
-                        }
-                        segments_data.append(segment_info)
+                # APIレスポンスの構造に基づいて処理
+                if "data" in result:
+                    # dataがリストの場合（実際のAPIレスポンス構造）
+                    if isinstance(result["data"], list):
+                        segments_data = result["data"]
+                        total_segments = len(segments_data)
+                    # dataがオブジェクトで、segmentsキーがある場合（仮定していた構造）
+                    elif isinstance(result["data"], dict) and "segments" in result["data"]:
+                        segments_data = result["data"]["segments"]
+                        total_segments = len(segments_data)
                 
                 # 概要情報を表示
                 summary = f"ドキュメントから {total_segments} 個のチャンクを取得しました"
@@ -82,8 +78,13 @@ class GetChunksTool(Tool):
                 # 変数として各セグメント情報を出力
                 yield self.create_variable_message("segments", segments_data)
                 yield self.create_variable_message("total_segments", total_segments)
-                yield self.create_variable_message("segment_ids", [s.get("id", "") for s in segments_data])
-                yield self.create_variable_message("segment_contents", [s.get("content", "") for s in segments_data])
+                
+                # セグメントIDとコンテンツのリストを作成
+                segment_ids = [s.get("id", "") for s in segments_data]
+                segment_contents = [s.get("content", "") for s in segments_data]
+                
+                yield self.create_variable_message("segment_ids", segment_ids)
+                yield self.create_variable_message("segment_contents", segment_contents)
                 
                 # 個別の変数としても各チャンクを出力（単一チャンクや先頭・末尾チャンク用）
                 if total_segments > 0:
