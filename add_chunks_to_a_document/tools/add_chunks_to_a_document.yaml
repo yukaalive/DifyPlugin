@@ -1,0 +1,82 @@
+identity:
+  name: add_chunk
+  author: あなたの名前
+  label:
+    en_US: Add Chunk
+    zh_Hans: 添加数据块
+    ja_JP: チャンク追加
+description:
+  human:
+    en_US: Add a chunk to a Dify dataset
+    zh_Hans: 向Dify数据集添加数据块
+    ja_JP: Difyデータセットにチャンクを追加します
+  llm: Add a chunk to a Dify dataset. This tool requires dataset_id, document_id, and content parameters.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      zh_Hans: 数据集ID
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the dataset to add the chunk to
+      zh_Hans: 要添加数据块的数据集ID
+      ja_JP: チャンクを追加するデータセットのID
+    llm_description: The ID of the dataset to add the chunk to
+    form: form
+  - name: document_id
+    type: string
+    required: true
+    label:
+      en_US: Document ID
+      zh_Hans: 文档ID
+      ja_JP: ドキュメントID
+    human_description:
+      en_US: The ID of the document to add the chunk to
+      zh_Hans: 要添加数据块的文档ID
+      ja_JP: チャンクを追加するドキュメントのID
+    llm_description: The ID of the document to add the chunk to
+    form: form
+  - name: content
+    type: string
+    required: true
+    label:
+      en_US: Content
+      zh_Hans: 内容
+      ja_JP: コンテンツ
+    human_description:
+      en_US: The content of the chunk
+      zh_Hans: 数据块的内容
+      ja_JP: チャンクの内容
+    llm_description: The content of the chunk
+    form: llm
+  - name: answer
+    type: string
+    required: false
+    label:
+      en_US: Answer
+      zh_Hans: 答案
+      ja_JP: 回答
+    human_description:
+      en_US: The answer associated with this chunk (optional)
+      zh_Hans: 与此数据块关联的答案（可选）
+      ja_JP: このチャンクに関連する回答（オプション）
+    llm_description: The answer associated with this chunk (optional)
+    form: form
+  - name: keywords
+    type: string
+    required: false
+    label:
+      en_US: Keywords
+      zh_Hans: 关键词
+      ja_JP: キーワード
+    human_description:
+      en_US: Keywords associated with this chunk, comma separated (optional)
+      zh_Hans: 与此数据块关联的关键词，用逗号分隔（可选）
+      ja_JP: このチャンクに関連するキーワード、カンマ区切り（オプション）
+    llm_description: Keywords associated with this chunk, comma separated (optional)
+    form: form
+extra:
+  python:
+    source: tools/add_chunks_to_a_document.py
