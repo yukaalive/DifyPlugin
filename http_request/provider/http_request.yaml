@@ -1,0 +1,17 @@
+identity:
+  author: yukaumezawa
+  name: http_request
+  label:
+    en_US: http_request
+    zh_Hans: http_request
+    pt_BR: http_request
+  description:
+    en_US: http_request
+    zh_Hans: http_request
+    pt_BR: http_request
+  icon: icon.svg
+tools:
+  - tools/http_request.yaml
+extra:
+  python:
+    source: provider/http_request.py

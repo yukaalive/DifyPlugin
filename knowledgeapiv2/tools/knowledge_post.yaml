@@ -1,0 +1,61 @@
+identity:
+  name: knowledge_post
+  author: YourName
+  label:
+    en_US: Knowledge Management
+    ja_JP: ナレッジ管理
+description:
+  human:
+    en_US: Create, update or delete data in Dify Knowledge API
+    ja_JP: Dify Knowledge APIでデータの作成、更新、削除を行います
+  llm: A tool for managing data in Dify Knowledge API.
+parameters:
+  - name: action
+    type: select
+    required: true
+    label:
+      en_US: Action Type
+      ja_JP: 操作タイプ
+    human_description:
+      en_US: Type of action to perform
+      ja_JP: 実行する操作の種類
+    llm_description: The type of action to perform (create, update, or delete)
+    form: form
+    options:
+      - value: "create"
+        label:
+          en_US: "Create"
+          ja_JP: "作成"
+      - value: "update"
+        label:
+          en_US: "Update"
+          ja_JP: "更新"
+      - value: "delete"
+        label:
+          en_US: "Delete"
+          ja_JP: "削除"
+  - name: datasetId
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      ja_JP: データセットID
+    human_description:
+      en_US: ID of the dataset to operate on
+      ja_JP: 操作するデータセットのID
+    llm_description: ID of the dataset to operate on
+    form: form
+  - name: content
+    type: string
+    required: false
+    label:
+      en_US: Content
+      ja_JP: コンテンツ
+    human_description:
+      en_US: Content to create or update (required for create and update actions)
+      ja_JP: 作成または更新するコンテンツ（作成と更新の場合は必須）
+    llm_description: Content to create or update (required for create and update actions)
+    form: llm
+extra:
+  python:
+    source: tools/knowledge_post.py

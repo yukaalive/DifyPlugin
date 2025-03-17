@@ -1,0 +1,17 @@
+identity:
+  author: yukaumezawa
+  name: knowledgeapi
+  label:
+    en_US: knowledgeapi
+    zh_Hans: knowledgeapi
+    pt_BR: knowledgeapi
+  description:
+    en_US: knowledgeapi
+    zh_Hans: knowledgeapi
+    pt_BR: knowledgeapi
+  icon: icon.svg
+tools:
+  - tools/knowledgeapi.yaml
+extra:
+  python:
+    source: provider/knowledgeapi.py

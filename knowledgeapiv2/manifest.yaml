@@ -1,0 +1,32 @@
+version: 0.0.1
+type: "plugin"
+author: "yuukaumezawa"
+name: "knowlege_api_tools"
+label:
+  en_US: "Knowledge API Plugin"
+description:
+  en_US: "A plugin for accessing Dify Knowledge API and making HTTP requests"
+created_at: "2025-03-16T21:51:00.000000000Z"
+icon: "icon.svg"
+resource:
+  memory: 1048576
+  permission:
+    tool:
+      enabled: true
+    app:
+      enabled: true
+    storage: 
+      enabled: true
+      size: 1048576
+plugins:
+  tools:
+    - "provider/knowledge_api.yaml"
+meta:
+  version: 0.0.1
+  arch:
+    - "amd64"
+    - "arm64"
+  runner:
+    language: "python"
+    version: "3.10"
+    entrypoint: "main"

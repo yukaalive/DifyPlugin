@@ -1,0 +1,38 @@
+identity:
+  name: knowledge_get
+  author: YourName
+  label:
+    en_US: Knowledge Search
+    ja_JP: ナレッジ検索
+description:
+  human:
+    en_US: Search knowledge from Dify Knowledge API
+    ja_JP: Dify Knowledge APIからナレッジを検索します
+  llm: A tool for searching knowledge from Dify Knowledge API.
+parameters:
+  - name: datasetId
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      ja_JP: データセットID
+    human_description:
+      en_US: ID of the dataset to search
+      ja_JP: 検索するデータセットのID
+    llm_description: ID of the dataset to search
+    form: form
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Search Query
+      ja_JP: 検索クエリ
+    human_description:
+      en_US: Query to search in the knowledge base
+      ja_JP: ナレッジベースで検索するクエリ
+    llm_description: Query to search in the knowledge base
+    form: llm
+  # その他のパラメータ...
+extra:
+  python:
+    source: tools/knowledge_get.py

@@ -1,0 +1,81 @@
+identity:
+  name: http_request
+  author: YourName
+  label:
+    en_US: HTTP Request
+    ja_JP: HTTPリクエスト
+description:
+  human:
+    en_US: Make a generic HTTP request to any URL
+    ja_JP: 任意のURLに対して汎用的なHTTPリクエストを実行します
+  llm: A tool for making HTTP requests to external APIs or web services.
+parameters:
+  - name: url
+    type: string
+    required: true
+    label:
+      en_US: URL
+      ja_JP: URL
+    human_description:
+      en_US: URL to send the request to
+      ja_JP: リクエストを送信するURL
+    llm_description: URL to send the request to
+    form: form
+  - name: method
+    type: select
+    required: true
+    default: "GET"
+    label:
+      en_US: HTTP Method
+      ja_JP: HTTPメソッド
+    human_description:
+      en_US: HTTP method to use
+      ja_JP: 使用するHTTPメソッド
+    llm_description: HTTP method to use for the request
+    form: form
+    options:
+      - value: "GET"
+        label:
+          en_US: "GET"
+          ja_JP: "GET"
+      - value: "POST"
+        label:
+          en_US: "POST"
+          ja_JP: "POST"
+      - value: "PUT"
+        label:
+          en_US: "PUT"
+          ja_JP: "PUT"
+      - value: "DELETE"
+        label:
+          en_US: "DELETE"
+          ja_JP: "DELETE"
+      - value: "PATCH"
+        label:
+          en_US: "PATCH"
+          ja_JP: "PATCH"
+  - name: headers
+    type: string
+    required: false
+    label:
+      en_US: Headers (JSON)
+      ja_JP: ヘッダー (JSON)
+    human_description:
+      en_US: HTTP headers in JSON format
+      ja_JP: JSON形式のHTTPヘッダー
+    llm_description: HTTP headers in JSON format
+    form: form
+  - name: body
+    type: string
+    required: false
+    label:
+      en_US: Request Body
+      ja_JP: リクエストボディ
+    human_description:
+      en_US: Request body for POST, PUT, or PATCH methods
+      ja_JP: POST、PUT、PATCHメソッド用のリクエストボディ
+    llm_description: Request body content for POST, PUT, or PATCH methods
+    form: form
+extra:
+  python:
+    source: tools/http_request.py

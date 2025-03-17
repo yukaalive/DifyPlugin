@@ -1,0 +1,40 @@
+identity:
+  author: あなたの名前
+  name: dify_knowledge
+  label:
+    en_US: Dify Knowledge Base
+    zh_Hans: Dify 知识库
+    ja_JP: Difyナレッジベース
+  description:
+    en_US: Access your Dify Knowledge Base via API
+    zh_Hans: 通过API访问您的Dify知识库
+    ja_JP: API経由でDifyナレッジベースにアクセスする
+  icon: icon.svg
+  tags:
+    - utilities
+credentials_for_provider:
+  api_key:
+    type: secret-input
+    required: true
+    label:
+      en_US: API Key
+      zh_Hans: API密钥
+      ja_JP: APIキー
+    placeholder:
+      en_US: Your Dify API Key (starts with app- or sk-)
+      zh_Hans: 您的Dify API密钥
+      ja_JP: DifyのAPIキー（app-またはsk-で始まる）
+    help:
+      en_US: Get your API key from Dify API Settings
+      zh_Hans: 从Dify API设置获取您的API密钥
+      ja_JP: Dify API設定からAPIキーを取得してください
+    url: https://cloud.dify.ai/api
+tools:
+  - tools/list_datasets.yaml
+  - tools/get_dataset_info.yaml
+  - tools/list_documents.yaml
+  - tools/get_document_segments.yaml
+  - tools/search_dataset.yaml
+extra:
+  python:
+    source: provider/dify_knowledge.py

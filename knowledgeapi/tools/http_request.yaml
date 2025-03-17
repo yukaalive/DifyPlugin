@@ -1,0 +1,266 @@
+identity:
+  name: http_request
+  author: あなたの名前
+  label:
+    en_US: HTTP Request
+    zh_Hans: HTTP请求
+    ja_JP: HTTPリクエスト
+description:
+  human:
+    en_US: Send HTTP requests to any API or use built-in functions for Dify Knowledge Base
+    zh_Hans: 发送HTTP请求到任何API或使用内置功能访问Dify知识库
+    ja_JP: 任意のAPIにHTTPリクエストを送信するか、Difyナレッジベース用の組み込み機能を使用
+  llm: This tool allows you to send HTTP requests to any API endpoint or use built-in functions to access Dify Knowledge Base.
+parameters:
+  - name: mode
+    type: select
+    required: true
+    label:
+      en_US: Mode
+      zh_Hans: 模式
+      ja_JP: モード
+    human_description:
+      en_US: Choose between custom HTTP request or Dify Knowledge Base operations
+      zh_Hans: 选择自定义HTTP请求或Dify知识库操作
+      ja_JP: カスタムHTTPリクエストかDifyナレッジベース操作かを選択
+    llm_description: Select the mode of operation - either make a custom HTTP request or use built-in Dify Knowledge Base functions.
+    form: form
+    options:
+      - value: http
+        label:
+          en_US: Custom HTTP Request
+          zh_Hans: 自定义HTTP请求
+          ja_JP: カスタムHTTPリクエスト
+      - value: dify_kb
+        label:
+          en_US: Dify Knowledge Base
+          zh_Hans: Dify知识库
+          ja_JP: Difyナレッジベース
+    default: http
+  # カスタムHTTPリクエストのパラメータ
+  - name: url
+    type: string
+    required: false
+    label:
+      en_US: URL
+      zh_Hans: URL
+      ja_JP: URL
+    human_description:
+      en_US: The complete URL to send the request to (for Custom HTTP Request)
+      zh_Hans: 发送请求的完整URL（用于自定义HTTP请求）
+      ja_JP: リクエストを送信する完全なURL（カスタムHTTPリクエスト用）
+    llm_description: The complete URL of the API endpoint to send the request to, including any query parameters.
+    form: form
+    placeholder:
+      en_US: https://api.example.com/endpoint
+      zh_Hans: https://api.example.com/endpoint
+      ja_JP: https://api.example.com/endpoint
+  - name: method
+    type: select
+    required: false
+    label:
+      en_US: HTTP Method
+      zh_Hans: HTTP方法
+      ja_JP: HTTPメソッド
+    human_description:
+      en_US: HTTP method to use for the request (for Custom HTTP Request)
+      zh_Hans: 请求使用的HTTP方法（用于自定义HTTP请求）
+      ja_JP: リクエストに使用するHTTPメソッド（カスタムHTTPリクエスト用）
+    llm_description: The HTTP method to use for the request.
+    form: form
+    options:
+      - value: GET
+        label:
+          en_US: GET
+          zh_Hans: GET
+          ja_JP: GET
+      - value: POST
+        label:
+          en_US: POST
+          zh_Hans: POST
+          ja_JP: POST
+      - value: PUT
+        label:
+          en_US: PUT
+          zh_Hans: PUT
+          ja_JP: PUT
+      - value: DELETE
+        label:
+          en_US: DELETE
+          zh_Hans: DELETE
+          ja_JP: DELETE
+      - value: PATCH
+        label:
+          en_US: PATCH
+          zh_Hans: PATCH
+          ja_JP: PATCH
+      - value: HEAD
+        label:
+          en_US: HEAD
+          zh_Hans: HEAD
+          ja_JP: HEAD
+    default: GET
+  - name: headers
+    type: string
+    required: false
+    label:
+      en_US: Headers (JSON)
+      zh_Hans: 标头 (JSON)
+      ja_JP: ヘッダー (JSON)
+    human_description:
+      en_US: HTTP headers in JSON format (for Custom HTTP Request)
+      zh_Hans: JSON格式的HTTP标头（用于自定义HTTP请求）
+      ja_JP: JSON形式のHTTPヘッダー（カスタムHTTPリクエスト用）
+    llm_description: HTTP headers in JSON format, e.g. {"Content-Type": "application/json", "Authorization": "Bearer xxxxx"}
+    form: form
+    placeholder:
+      en_US: {"Content-Type": "application/json", "Authorization": "Bearer token"}
+      zh_Hans: {"Content-Type": "application/json", "Authorization": "Bearer token"}
+      ja_JP: {"Content-Type": "application/json", "Authorization": "Bearer token"}
+  - name: body
+    type: string
+    required: false
+    label:
+      en_US: Request Body (JSON)
+      zh_Hans: 请求主体 (JSON)
+      ja_JP: リクエストボディ (JSON)
+    human_description:
+      en_US: Request body in JSON format (for POST, PUT, PATCH in Custom HTTP Request)
+      zh_Hans: JSON格式的请求主体（用于自定义HTTP请求中的POST，PUT，PATCH）
+      ja_JP: JSON形式のリクエストボディ（カスタムHTTPリクエストのPOST、PUT、PATCH用）
+    llm_description: Request body in JSON format. Only needed for methods like POST, PUT, or PATCH.
+    form: form
+    placeholder:
+      en_US: {"key": "value"}
+      zh_Hans: {"key": "value"}
+      ja_JP: {"key": "value"}
+  # Difyナレッジベースのパラメータ
+  - name: api_key
+    type: secret-input
+    required: false
+    label:
+      en_US: "Dify API Key"
+      zh_Hans: "Dify API密钥"
+      ja_JP: "Dify APIキー"
+    human_description:
+      en_US: "Your Dify API Key (for Dify Knowledge Base operations)"
+      zh_Hans: "您的Dify API密钥（用于Dify知识库操作）"
+      ja_JP: "DifyのAPIキー（Difyナレッジベース操作用）"
+    llm_description: "Your Dify API Key, starting with app- or sk-. Required for Dify Knowledge Base operations."
+    form: form
+    placeholder:
+      en_US: "app-xxxxxxxx or sk-xxxxxxxx"
+      zh_Hans: "app-xxxxxxxx 或 sk-xxxxxxxx"
+      ja_JP: "app-xxxxxxxx または sk-xxxxxxxx"
+  - name: operation
+    type: select
+    required: false
+    label:
+      en_US: Operation
+      zh_Hans: 操作
+      ja_JP: 操作
+    human_description:
+      en_US: The operation to perform on Dify Knowledge Base
+      zh_Hans: 在Dify知识库上执行的操作
+      ja_JP: Difyナレッジベースで実行する操作
+    llm_description: The specific operation to perform on the Dify Knowledge Base.
+    form: form
+    options:
+      - value: list_datasets
+        label:
+          en_US: List Knowledge Bases
+          zh_Hans: 列出知识库
+          ja_JP: ナレッジベース一覧
+      - value: get_dataset_info
+        label:
+          en_US: Get Knowledge Base Info
+          zh_Hans: 获取知识库信息
+          ja_JP: ナレッジベース情報取得
+      - value: list_documents
+        label:
+          en_US: List Documents
+          zh_Hans: 列出文档
+          ja_JP: ドキュメント一覧
+      - value: get_segments
+        label:
+          en_US: Get Document Content
+          zh_Hans: 获取文档内容
+          ja_JP: ドキュメント内容取得
+      - value: search
+        label:
+          en_US: Search Knowledge Base
+          zh_Hans: 搜索知识库
+          ja_JP: ナレッジベース検索
+    default: list_datasets
+  - name: dataset_id
+    type: string
+    required: false
+    label:
+      en_US: Knowledge Base ID
+      zh_Hans: 知识库ID
+      ja_JP: ナレッジベースID
+    human_description:
+      en_US: ID of the knowledge base (for Dify Knowledge Base operations except List Knowledge Bases)
+      zh_Hans: 知识库的ID（除列出知识库外的所有Dify知识库操作）
+      ja_JP: ナレッジベースのID（ナレッジベース一覧以外のDifyナレッジベース操作用）
+    llm_description: The unique identifier of the knowledge base you want to work with. Not required for listing knowledge bases.
+    form: form
+  - name: document_id
+    type: string
+    required: false
+    label:
+      en_US: Document ID
+      zh_Hans: 文档ID
+      ja_JP: ドキュメントID
+    human_description:
+      en_US: ID of the document (only required for Get Document Content in Dify Knowledge Base)
+      zh_Hans: 文档的ID（仅用于Dify知识库的获取文档内容操作）
+      ja_JP: ドキュメントのID（Difyナレッジベースのドキュメント内容取得のみ必要）
+    llm_description: The unique identifier of the document you want to get content from. Only required for Get Document Content operation.
+    form: form
+  - name: query
+    type: string
+    required: false
+    label:
+      en_US: Search Query
+      zh_Hans: 搜索查询
+      ja_JP: 検索クエリ
+    human_description:
+      en_US: Keywords or question to search for (only required for Search in Dify Knowledge Base)
+      zh_Hans: 要搜索的关键词或问题（仅用于Dify知识库的搜索操作）
+      ja_JP: 検索するキーワードや質問（Difyナレッジベースの検索のみ必要）
+    llm_description: The search query, which can be keywords or a natural language question. Only required for Search operation.
+    form: form
+  - name: result_count
+    type: select
+    required: false
+    label:
+      en_US: Results to Show
+      zh_Hans: 显示结果数
+      ja_JP: 表示結果数
+    human_description:
+      en_US: How many search results to return (only for Search in Dify Knowledge Base)
+      zh_Hans: 返回多少搜索结果（仅用于Dify知识库的搜索操作）
+      ja_JP: いくつの検索結果を返すか（Difyナレッジベースの検索のみ）
+    llm_description: The number of search results to return. Only applicable for Search operation.
+    form: form
+    options:
+      - value: "3"
+        label:
+          en_US: 3 results
+          zh_Hans: 3个结果
+          ja_JP: 3件
+      - value: "5"
+        label:
+          en_US: 5 results
+          zh_Hans: 5个结果
+          ja_JP: 5件
+      - value: "10"
+        label:
+          en_US: 10 results
+          zh_Hans: 10个结果
+          ja_JP: 10件
+    default: "5"
+extra:
+  python:
+    source: tools/http_request.py

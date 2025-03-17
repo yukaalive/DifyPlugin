@@ -1,0 +1,87 @@
+identity:
+  name: knowledge_list
+  author: YourName
+  label:
+    en_US: List Knowledge Resources
+    ja_JP: ナレッジリソース一覧取得
+description:
+  human:
+    en_US: Get a list of datasets or segments from Dify Knowledge API
+    ja_JP: Dify Knowledge APIからデータセットまたはセグメントの一覧を取得します
+  llm: A tool for retrieving lists of datasets or segments from Dify Knowledge API.
+parameters:
+  - name: type
+    type: select
+    required: true
+    label:
+      en_US: List Type
+      ja_JP: 一覧タイプ
+    human_description:
+      en_US: Type of resources to list (datasets or segments)
+      ja_JP: 取得するリソースのタイプ（データセットまたはセグメント）
+    llm_description: Choose whether to list datasets or segments
+    form: form
+    options:
+      - value: "datasets"
+        label:
+          en_US: "Datasets"
+          ja_JP: "データセット"
+      - value: "segments"
+        label:
+          en_US: "Segments"
+          ja_JP: "セグメント"
+  - name: datasetId
+    type: string
+    required: false
+    label:
+      en_US: Dataset ID
+      ja_JP: データセットID
+    human_description:
+      en_US: Required when listing segments
+      ja_JP: セグメント一覧を取得する場合に必要
+    llm_description: Dataset ID (Required when listing segments)
+    form: form
+  - name: page
+    type: number
+    required: false
+    default: 1
+    label:
+      en_US: Page Number
+      ja_JP: ページ番号
+    human_description:
+      en_US: Page number for pagination
+      ja_JP: ページネーションのためのページ番号
+    llm_description: Page number for pagination
+    form: form
+  - name: limit
+    type: select
+    required: false
+    default: 20
+    label:
+      en_US: Page Size
+      ja_JP: ページサイズ
+    human_description:
+      en_US: Number of items per page
+      ja_JP: 1ページあたりの項目数
+    llm_description: Number of items per page
+    form: form
+    options:
+      - value: 10
+        label:
+          en_US: "10 items"
+          ja_JP: "10件"
+      - value: 20
+        label:
+          en_US: "20 items"
+          ja_JP: "20件"
+      - value: 50
+        label:
+          en_US: "50 items"
+          ja_JP: "50件"
+      - value: 100
+        label:
+          en_US: "100 items"
+          ja_JP: "100件"
+extra:
+  python:
+    source: tools/knowledge_list.py

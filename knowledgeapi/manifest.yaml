@@ -1,0 +1,21 @@
+version: 0.0.1
+type: "plugin"
+author: "あなたの名前"
+name: "http_request"
+label:
+  en_US: "HTTP Request"
+  zh_Hans: "HTTP请求"
+  ja_JP: "HTTPリクエスト"
+description:
+  en_US: "Send HTTP requests to any API endpoint, including Dify Knowledge Base"
+  zh_Hans: "向任何API端点发送HTTP请求，包括Dify知识库"
+  ja_JP: "Difyナレッジベースを含む任意のAPIエンドポイントにHTTPリクエストを送信"
+icon: "icon.svg"
+resource:
+  memory: 268435456
+  permission:
+    tool:
+      enabled: true
+plugins:
+  tools:
+    - "tools/http_request.yaml"
