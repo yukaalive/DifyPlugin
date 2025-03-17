@@ -1,17 +1,28 @@
 identity:
-  name: add_chunk
-  author: あなたの名前
+  name: add chunks
+  author: yukaumezawa
   label:
     en_US: Add Chunk
-    zh_Hans: 添加数据块
     ja_JP: チャンク追加
 description:
   human:
     en_US: Add a chunk to a Dify dataset
-    zh_Hans: 向Dify数据集添加数据块
     ja_JP: Difyデータセットにチャンクを追加します
-  llm: Add a chunk to a Dify dataset. This tool requires dataset_id, document_id, and content parameters.
+  llm: Add a chunk to a Dify dataset. This tool requires API key, dataset_id, document_id, and content parameters.
 parameters:
+  - name: api_key
+    type: secret-input
+    required: true
+    label:
+      en_US: API Key
+      zh_Hans: API 密钥
+      ja_JP: APIキー
+    human_description:
+      en_US: Your Dify API key
+      zh_Hans: 您的Dify API密钥
+      ja_JP: DifyのAPIキー
+    llm_description: Your Dify API key for authentication
+    form: form
   - name: dataset_id
     type: string
     required: true
