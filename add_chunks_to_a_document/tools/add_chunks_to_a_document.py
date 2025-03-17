@@ -20,22 +20,22 @@ class AddChunkTool(Tool):
         
         # 必須パラメータのチェック
         if not api_key:
-            yield self.create_text_message("❌ エラー: APIキーが指定されていません")
+            yield self.create_text_message("エラー: APIキーが指定されていません")
             return
         
         if not dataset_id:
-            yield self.create_text_message("❌ エラー: Dataset ID が指定されていません")
+            yield self.create_text_message("エラー: Dataset ID が指定されていません")
             return
         
         if not document_id:
-            yield self.create_text_message("❌ エラー: Document ID が指定されていません")
+            yield self.create_text_message("エラー: Document ID が指定されていません")
             return
         
         if not content:
-            yield self.create_text_message("❌ エラー: Content が指定されていません")
+            yield self.create_text_message("エラー: Content が指定されていません")
             return
         
-        # キーワードリストを処理
+        # カンマで区切り、リストにする
         keyword_list = []
         if keywords:
             keyword_list = [k.strip() for k in keywords.split(",") if k.strip()]
@@ -63,12 +63,10 @@ class AddChunkTool(Tool):
             "segments": [segment_data]
         }
         
-        # プログレス表示
-        yield self.create_text_message("🔄 チャンクを追加中...")
-        
+ 
         try:
             # Dify APIにチャンクを追加するリクエスト
-            endpoint = f"https://api.dify.ai/v1/datasets/{dataset_id}/documents/{document_id}/segments"
+            endpoint = f"http://localhost/v1/datasets/{dataset_id}/documents/{document_id}/segments"
             
             response = requests.post(
                 endpoint,
@@ -79,7 +77,7 @@ class AddChunkTool(Tool):
             
             # レスポンスのステータスコードを確認
             if response.status_code >= 400:
-                error_msg = f"❌ APIエラー: ステータスコード {response.status_code}"
+                error_msg = f"APIエラー: ステータスコード {response.status_code}"
                 try:
                     error_detail = response.json()
                     error_msg += f"\n詳細: {error_detail.get('message', 'Unknown error')}"
@@ -93,7 +91,7 @@ class AddChunkTool(Tool):
             # 成功レスポンス
             try:
                 result = response.json()
-                yield self.create_text_message(f"✅ チャンクが正常に追加されました!")
+                yield self.create_text_message(f"チャンクが正常に追加されました")
                 
                 # チャンクIDなどの情報を表示
                 segment_info = ""
@@ -107,16 +105,16 @@ class AddChunkTool(Tool):
                 # 詳細情報をJSONとして返す
                 yield self.create_json_message(result)
             except ValueError:
-                yield self.create_text_message("⚠️ チャンクは追加されましたが、JSONレスポンスの解析に失敗しました")
+                yield self.create_text_message("チャンクは追加されましたが、JSONレスポンスの解析に失敗しました")
             
         except requests.Timeout:
-            yield self.create_text_message("❌ エラー: APIリクエストがタイムアウトしました。サーバーの応答時間が長いか、ネットワーク接続に問題がある可能性があります。")
+            yield self.create_text_message("エラー: APIリクエストがタイムアウトしました。サーバーの応答時間が長いか、ネットワーク接続に問題がある可能性があります。")
         
         except requests.ConnectionError:
-            yield self.create_text_message("❌ エラー: APIサーバーへの接続に失敗しました。サーバーURLが正しいか、ネットワーク接続を確認してください。")
+            yield self.create_text_message("エラー: APIサーバーへの接続に失敗しました。サーバーURLが正しいか、ネットワーク接続を確認してください。")
             
         except requests.RequestException as e:
-            yield self.create_text_message(f"❌ エラー: チャンクの追加に失敗しました: {str(e)}")
+            yield self.create_text_message(f"エラー: チャンクの追加に失敗しました: {str(e)}")
             
             if hasattr(e, 'response') and e.response:
                 try:
@@ -126,4 +124,4 @@ class AddChunkTool(Tool):
                     yield self.create_text_message(f"エラーレスポンス: {e.response.text[:300]}...")
         
         except Exception as e:
-            yield self.create_text_message(f"❌ 予期しないエラーが発生しました: {str(e)}")
+            yield self.create_text_message(f"予期しないエラーが発生しました: {str(e)}")

@@ -1,8 +1,8 @@
 identity:
-  name: add chunks
+  name: add_chunks
   author: yukaumezawa
   label:
-    en_US: Add Chunk
+    en_US: Add_Chunk
     ja_JP: チャンク追加
 description:
   human:

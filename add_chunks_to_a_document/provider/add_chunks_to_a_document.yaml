@@ -1,8 +1,8 @@
 identity:
   author: yukaumezawa
-  name: dify knowledge api
+  name: dify_knowledge_api
   label:
-    en_US: dify knowledge api
+    en_US: dify_knowledge_api
     ja_JP: Dify　ナレッジAPIツール
   description:
     en_US: A tool for adding chunks to Dify datasets
