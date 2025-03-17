@@ -1,12 +1,12 @@
 identity:
-  name: update_chunks
+  name: update_chunk
   author: yukaumezawa
   label:
-    en_US: update_chunks
+    en_US: Update Chunk
 description:
   human:
-    en_US: update a chunk in a Dify dataset
-  llm: Add a chunk to a Dify dataset. This tool requires API key, dataset_id, document_id, and content parameters.
+    en_US: Update a chunk in a Dify dataset
+  llm: Update a chunk in a Dify dataset. This tool requires API key, dataset_id, document_id, segment_id, and content parameters.
 parameters:
   - name: api_key
     type: secret-input
@@ -17,14 +17,23 @@ parameters:
       en_US: Your Dify API key
     llm_description: Your Dify API key for authentication
     form: llm
+  - name: base_url
+    type: string
+    required: false
+    label:
+      en_US: Base URL
+    human_description:
+      en_US: The base URL of your Dify API (default is http://localhost)
+    llm_description: The base URL of your Dify API (default is http://localhost)
+    form: llm
   - name: dataset_id
     type: string
     required: true
     label:
       en_US: Dataset ID
     human_description:
-      en_US: The ID of the dataset to add the chunk to
-    llm_description: The ID of the dataset to add the chunk to
+      en_US: The ID of the dataset containing the chunk
+    llm_description: The ID of the dataset containing the chunk
     form: llm
   - name: document_id
     type: string
@@ -32,8 +41,8 @@ parameters:
     label:
       en_US: Document ID
     human_description:
-      en_US: The ID of the document to add the chunk to
-    llm_description: The ID of the document to add the chunk to
+      en_US: The ID of the document containing the chunk
+    llm_description: The ID of the document containing the chunk
     form: llm
   - name: segment_id
     type: string
@@ -41,8 +50,8 @@ parameters:
     label:
       en_US: Segment ID
     human_description:
-      en_US: The ID of the segment to add the chunk to
-    llm_description: The ID of the segment to add the chunk to
+      en_US: The ID of the segment to update
+    llm_description: The ID of the segment to update
     form: llm
   - name: content
     type: string
@@ -50,8 +59,8 @@ parameters:
     label:
       en_US: Content
     human_description:
-      en_US: The content of the chunk
-    llm_description: The content of the chunk
+      en_US: The new content of the chunk
+    llm_description: The new content of the chunk
     form: llm
   - name: answer
     type: string
@@ -70,6 +79,24 @@ parameters:
     human_description:
       en_US: Keywords associated with this chunk, comma separated (optional)
     llm_description: Keywords associated with this chunk, comma separated (optional)
+    form: llm
+  - name: enabled
+    type: boolean
+    required: false
+    label:
+      en_US: Enabled
+    human_description:
+      en_US: Whether this chunk is enabled (default is true)
+    llm_description: Whether this chunk is enabled (default is true)
+    form: llm
+  - name: regenerate_child_chunks
+    type: boolean
+    required: false
+    label:
+      en_US: Regenerate Child Chunks
+    human_description:
+      en_US: Whether to regenerate child chunks (default is false)
+    llm_description: Whether to regenerate child chunks (default is false)
     form: llm
 extra:
   python:

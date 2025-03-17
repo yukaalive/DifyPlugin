@@ -8,7 +8,7 @@ from dify_plugin.entities.tool import ToolInvokeMessage
 class UpdateChunkTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         """
-        Add a chunk to a Dify dataset
+        Update a chunk in a Dify dataset
         """
         # パラメータを取得
         api_key = tool_parameters.get("api_key")
@@ -18,6 +18,8 @@ class UpdateChunkTool(Tool):
         content = tool_parameters.get("content")
         answer = tool_parameters.get("answer", "")
         keywords = tool_parameters.get("keywords", "")
+        enabled = tool_parameters.get("enabled", True)
+        regenerate_child_chunks = tool_parameters.get("regenerate_child_chunks", False)
         
         # keywordをカンマで区切りしてリストにする
         keyword_list = []
@@ -30,7 +32,7 @@ class UpdateChunkTool(Tool):
             "Content-Type": "application/json"
         }
         
-        # セグメントデータの準備
+        # API仕様に合わせてリクエストデータ構造を修正
         segment_data = {
             "content": content
         }
@@ -41,16 +43,24 @@ class UpdateChunkTool(Tool):
         
         if keyword_list:
             segment_data["keywords"] = keyword_list
+            
+        # enabledパラメータを追加
+        segment_data["enabled"] = enabled
         
         # リクエストデータ構造
         data = {
-            "segments": [segment_data]
+            "segment": segment_data
         }
         
- 
+        # regenerate_child_chunksがTrueの場合は追加
+        if regenerate_child_chunks:
+            data["regenerate_child_chunks"] = True
+        
         try:
-            # Dify APIにチャンクを追加するリクエスト
-            endpoint = f"http://localhost/v1/datasets/{dataset_id}/documents/{document_id}/segments/{segment_id}"
+            # Dify APIにチャンクを更新リクエスト
+            # API仕様に合わせてエンドポイントを修正
+            base_url = tool_parameters.get("base_url", "http://localhost")
+            endpoint = f"{base_url}/v1/datasets/{dataset_id}/documents/{document_id}/segments/{segment_id}"
             
             response = requests.post(
                 endpoint,
@@ -75,21 +85,12 @@ class UpdateChunkTool(Tool):
             # 成功レスポンス
             try:
                 result = response.json()
-                yield self.create_text_message(f"チャンクが正常に追加されました")
-                
-                # チャンク情報を表示
-                segment_info = ""
-                if "data" in result and "segments" in result["data"]:
-                    for i, segment in enumerate(result["data"]["segments"]):
-                        segment_info += f"\nチャンク {i+1} ID: {segment.get('id', 'Unknown')}"
-                
-                if segment_info:
-                    yield self.create_text_message(segment_info)
+                yield self.create_text_message(f"チャンクが正常にアップデートされました")
                 
                 # 詳細情報をJSONで返却
                 yield self.create_json_message(result)
             except ValueError:
-                yield self.create_text_message("チャンクは追加されましたが、JSONレスポンスの解析に失敗しました")
+                yield self.create_text_message("チャンクは更新されましたが、JSONレスポンスの解析に失敗しました")
             
         except requests.Timeout:
             yield self.create_text_message("エラー: APIリクエストがタイムアウトしました。サーバーの応答時間が長いか、ネットワーク接続に問題がある可能性があります。")
@@ -98,7 +99,7 @@ class UpdateChunkTool(Tool):
             yield self.create_text_message("エラー: APIサーバーへの接続に失敗しました。サーバーURLが正しいか、ネットワーク接続を確認してください。")
             
         except requests.RequestException as e:
-            yield self.create_text_message(f"エラー: チャンクの追加に失敗しました: {str(e)}")
+            yield self.create_text_message(f"エラー: チャンクの更新に失敗しました: {str(e)}")
             
             if hasattr(e, 'response') and e.response:
                 try:
@@ -106,4 +107,3 @@ class UpdateChunkTool(Tool):
                     yield self.create_json_message(error_detail)
                 except ValueError:
                     yield self.create_text_message(f"エラーレスポンス: {e.response.text[:300]}...")
-        
