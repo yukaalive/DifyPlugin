@@ -4,14 +4,8 @@ author: yukaumezawa
 name: knowledge_api_tool
 label:
   en_US: knowledge api
-  ja_JP: add_chunks_to_a_document
-  zh_Hans: add_chunks_to_a_document
-  pt_BR: add_chunks_to_a_document
 description:
   en_US: add_chinks_to_a_document
-  ja_JP: add_chinks_to_a_document
-  zh_Hans: add_chinks_to_a_document
-  pt_BR: add_chinks_to_a_document
 icon: icon.svg
 resource:
   memory: 268435456

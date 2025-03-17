@@ -1,0 +1,104 @@
+identity:
+  name: get_chunks
+  author: yukaumezawa
+  label:
+    en_US: Get Chunks
+    ja_JP: チャンク取得
+description:
+  human:
+    en_US: Get chunks from a Dify document
+    ja_JP: Difyドキュメントからチャンクを取得する
+  llm: Get chunks from a Dify document. This tool requires API key, dataset_id, and document_id parameters.
+parameters:
+  - name: api_key
+    type: secret-input
+    required: true
+    label:
+      en_US: API Key
+      ja_JP: APIキー
+    human_description:
+      en_US: Your Dify API key
+      ja_JP: DifyのAPIキー
+    llm_description: Your Dify API key for authentication
+    form: llm
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the dataset containing the document
+      ja_JP: ドキュメントを含むデータセットのID
+    llm_description: The ID of the dataset containing the document
+    form: llm
+  - name: document_id
+    type: string
+    required: true
+    label:
+      en_US: Document ID
+      ja_JP: ドキュメントID
+    human_description:
+      en_US: The ID of the document to get chunks from
+      ja_JP: チャンクを取得するドキュメントのID
+    llm_description: The ID of the document to get chunks from
+    form: llm
+  - name: keyword
+    type: string
+    required: false
+    label:
+      en_US: Keyword
+      ja_JP: キーワード
+    human_description:
+      en_US: Keyword to filter chunks (optional)
+      ja_JP: チャンクをフィルターするキーワード（任意）
+    llm_description: Keyword to filter chunks (optional)
+    form: llm
+  - name: status
+    type: string
+    required: false
+    label:
+      en_US: Status
+      ja_JP: ステータス
+    human_description:
+      en_US: Search status filter (optional)
+      ja_JP: 検索ステータスフィルター（任意）
+    llm_description: Search status filter (optional)
+    form: llm
+output_schema:
+  type: object
+  properties:
+    segments:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          content:
+            type: string
+          answer:
+            type: string
+          keywords:
+            type: array
+            items:
+              type: string
+          enabled:
+            type: boolean
+    total_segments:
+      type: integer
+    segment_ids:
+      type: array
+      items:
+        type: string
+    segment_contents:
+      type: array
+      items:
+        type: string
+    first_segment:
+      type: object
+    last_segment:
+      type: object
+extra:
+  python:
+    source: tools/get_chunks_from_a_document.py

@@ -2,7 +2,7 @@ identity:
   name: add_chunks
   author: yukaumezawa
   label:
-    en_US: add_Chunks
+    en_US: Add Chunks
 description:
   human:
     en_US: Add a chunk to a Dify dataset
