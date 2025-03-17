@@ -1,11 +1,11 @@
 identity:
-  name: add_chunks
+  name: update_chunks
   author: yukaumezawa
   label:
-    en_US: add_Chunks
+    en_US: update_chunks
 description:
   human:
-    en_US: Add a chunk to a Dify dataset
+    en_US: update a chunk in a Dify dataset
   llm: Add a chunk to a Dify dataset. This tool requires API key, dataset_id, document_id, and content parameters.
 parameters:
   - name: api_key
@@ -41,6 +41,17 @@ parameters:
       ja_JP: チャンクを追加するドキュメントのID
     llm_description: The ID of the document to add the chunk to
     form: llm
+  - name: segment_id
+    type: string
+    required: true
+    label:
+      en_US: Segment ID
+      ja_JP: セグメントID
+    human_description:
+      en_US: The ID of the segment to add the chunk to
+      ja_JP: チャンクを追加するセグメントのID
+    llm_description: The ID of the segment to add the chunk to
+    form: llm
   - name: content
     type: string
     required: true
@@ -68,7 +79,6 @@ parameters:
     required: false
     label:
       en_US: Keywords
-      zh_Hans: 关键词
       ja_JP: キーワード
     human_description:
       en_US: Keywords associated with this chunk, comma separated (optional)
@@ -77,4 +87,4 @@ parameters:
     form: llm
 extra:
   python:
-    source: tools/add_chunks_to_a_document.py
+    source: tools/update_a_chunk_in_a_document.py

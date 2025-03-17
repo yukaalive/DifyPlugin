@@ -1,9 +1,9 @@
 version: 0.0.1
 type: plugin
 author: yukaumezawa
-name: add_chunks_to_a_document
+name: knowledge_api_tool
 label:
-  en_US: add_chunks_to_a_document
+  en_US: knowledge api
   ja_JP: add_chunks_to_a_document
   zh_Hans: add_chunks_to_a_document
   pt_BR: add_chunks_to_a_document

@@ -5,13 +5,14 @@ identity:
     en_US: dify_knowledge_api
     ja_JP: Dify　ナレッジAPIツール
   description:
-    en_US: A tool for adding chunks to Dify datasets
-    ja_JP: Difyデータセットにチャンクを追加するツール
+    en_US: A tool for Dify datasets
+    ja_JP: DifyナレッジAPIのためのツール
   icon: icon.svg
   tags:
     - utilities
 tools:
   - tools/add_chunks_to_a_document.yaml
+  - tools/update_a_chunk_in_a_document.yaml
 extra:
   python:
     source: provider/add_chunks_to_a_document.py

@@ -5,7 +5,7 @@ import requests
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-class AddChunkTool(Tool):
+class UpdateChunkTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         """
         Add a chunk to a Dify dataset
@@ -14,6 +14,7 @@ class AddChunkTool(Tool):
         api_key = tool_parameters.get("api_key")
         dataset_id = tool_parameters.get("dataset_id")
         document_id = tool_parameters.get("document_id")
+        segment_id = tool_parameters.get("segment_id")
         content = tool_parameters.get("content")
         answer = tool_parameters.get("answer", "")
         keywords = tool_parameters.get("keywords", "")
@@ -49,7 +50,7 @@ class AddChunkTool(Tool):
  
         try:
             # Dify APIにチャンクを追加するリクエスト
-            endpoint = f"http://localhost/v1/datasets/{dataset_id}/documents/{document_id}/segments"
+            endpoint = f"http://localhost/v1/datasets/{dataset_id}/documents/{document_id}/segments/{segment_id}"
             
             response = requests.post(
                 endpoint,
