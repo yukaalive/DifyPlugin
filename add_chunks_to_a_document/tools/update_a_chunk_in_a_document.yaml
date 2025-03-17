@@ -13,10 +13,8 @@ parameters:
     required: true
     label:
       en_US: API Key
-      ja_JP: APIキー
     human_description:
       en_US: Your Dify API key
-      ja_JP: DifyのAPIキー
     llm_description: Your Dify API key for authentication
     form: llm
   - name: dataset_id
@@ -24,10 +22,8 @@ parameters:
     required: true
     label:
       en_US: Dataset ID
-      ja_JP: データセットID
     human_description:
       en_US: The ID of the dataset to add the chunk to
-      ja_JP: チャンクを追加するデータセットのID
     llm_description: The ID of the dataset to add the chunk to
     form: llm
   - name: document_id
@@ -35,10 +31,8 @@ parameters:
     required: true
     label:
       en_US: Document ID
-      ja_JP: ドキュメントID
     human_description:
       en_US: The ID of the document to add the chunk to
-      ja_JP: チャンクを追加するドキュメントのID
     llm_description: The ID of the document to add the chunk to
     form: llm
   - name: segment_id
@@ -46,10 +40,8 @@ parameters:
     required: true
     label:
       en_US: Segment ID
-      ja_JP: セグメントID
     human_description:
       en_US: The ID of the segment to add the chunk to
-      ja_JP: チャンクを追加するセグメントのID
     llm_description: The ID of the segment to add the chunk to
     form: llm
   - name: content
@@ -57,10 +49,8 @@ parameters:
     required: true
     label:
       en_US: Content
-      ja_JP: コンテンツ
     human_description:
       en_US: The content of the chunk
-      ja_JP: チャンクの内容
     llm_description: The content of the chunk
     form: llm
   - name: answer
@@ -68,10 +58,8 @@ parameters:
     required: false
     label:
       en_US: Answer
-      ja_JP: 回答
     human_description:
       en_US: The answer associated with this chunk (optional)
-      ja_JP: このチャンクに関連する回答（オプション）
     llm_description: The answer associated with this chunk (optional)
     form: llm
   - name: keywords
@@ -79,10 +67,8 @@ parameters:
     required: false
     label:
       en_US: Keywords
-      ja_JP: キーワード
     human_description:
       en_US: Keywords associated with this chunk, comma separated (optional)
-      ja_JP: このチャンクに関連するキーワード、カンマ区切り（オプション）
     llm_description: Keywords associated with this chunk, comma separated (optional)
     form: llm
 extra:
