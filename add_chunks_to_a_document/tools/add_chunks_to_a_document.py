@@ -55,7 +55,7 @@ class AddChunkTool(Tool):
                 endpoint,
                 headers=headers,
                 json=data,
-                timeout=30
+                timeout=60
             )
             
             # レスポンスのステータスコードを確認
