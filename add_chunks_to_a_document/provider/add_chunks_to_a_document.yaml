@@ -14,6 +14,7 @@ tools:
   - tools/add_chunks_to_a_document.yaml
   - tools/update_a_chunk_in_a_document.yaml
   - tools/get_chunks_from_a_document.yaml
+  - tools/create_a_document_from_a_file.yaml
 extra:
   python:
     source: provider/add_chunks_to_a_document.py

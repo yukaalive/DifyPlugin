@@ -5,7 +5,7 @@ name: knowledge_api_tool
 label:
   en_US: knowledge api
 description:
-  en_US: add_chinks_to_a_document
+  en_US: knowledge_api_tool
 icon: icon.svg
 resource:
   memory: 268435456

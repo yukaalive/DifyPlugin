@@ -1,0 +1,47 @@
+identity:
+  name: create_chunk
+  author: yukaumezawa
+  label:
+    en_US: Create Chunks
+    ja_JP: チャンク作成
+description:
+  human:
+    en_US: create a document from a file
+    ja_JP: ファイルからドキュメントを作成する
+  llm: create a document from a file
+parameters:
+  - name: api_key
+    type: secret-input
+    required: true
+    label:
+      en_US: API Key
+      ja_JP: APIキー
+    human_description:
+      en_US: Your Dify API key
+      ja_JP: DifyのAPIキー
+    llm_description: Your Dify API key for authentication
+    form: llm
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the dataset containing the document
+      ja_JP: ドキュメントを含むデータセットのID
+    llm_description: The ID of the dataset containing the document
+    form: llm
+  - name: files
+    type: files
+    required: true
+    label:
+      en_US: Files
+      ja_JP: ファイル
+    human_description:
+      en_US: The file to process
+      ja_JP: 処理するファイル
+    form: form
+extra:
+  python:
+    source: tools/create_a_document_from_a_file.py

@@ -85,8 +85,6 @@ output_schema:
               type: string
           enabled:
             type: boolean
-    total_segments:
-      type: integer
     segment_ids:
       type: array
       items:
@@ -95,10 +93,6 @@ output_schema:
       type: array
       items:
         type: string
-    first_segment:
-      type: object
-    last_segment:
-      type: object
 extra:
   python:
     source: tools/get_chunks_from_a_document.py
